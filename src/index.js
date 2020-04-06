@@ -5,4 +5,4 @@ export default () => {
   const name = readlineSync.question('May I have your name? ');
   hello = `Hello, ${name}!`;
   return hello;
-};.
+};
