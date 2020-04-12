@@ -1,13 +1,15 @@
 import readlineSync from 'readline-sync';
 
-const getName = () => readlineSync.question('May I have your name? ');
-
 let userName = '';
 
-export const helloGame = () => {
+export const getName = () => {
   console.log('Welcome to the Brain Games!');
+  userName = readlineSync.question('May I have your name? ');
+  return userName;
+};
+
+export const helloGame = () => {
   let hello = '';
-  userName = getName();
   hello = `Hello, ${userName}!`;
   return hello;
 };
@@ -23,7 +25,7 @@ const numberCheck = (num) => {
   return result;
 };
 
-const randomNum = () => {
+export const randomNum = () => {
   const min = 1;
   const max = 50;
   const num = Math.floor(Math.random() * (max - min) + min);
@@ -31,6 +33,7 @@ const randomNum = () => {
 };
 
 export const evenGame = () => {
+  getName();
   console.log(helloGame());
   console.log("Answer 'yes' if the number is even, otherwise answer 'no'.");
   for (let i = 0; i < 3; i += 1) {

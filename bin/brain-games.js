@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import { helloGame } from '../src/index.js';
+import { getName } from '../src/index.js';
 
-console.log(helloGame());
+console.log(`Hello, ${getName()}`);
