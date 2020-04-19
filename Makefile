@@ -13,6 +13,9 @@ brain-calc:
 brain-nod:
 	node bin/brain-nod.js
 
+brain-progression: 
+	node bin/brain-progression.js
+
 publish:
 	npm publish --dry-run
 
