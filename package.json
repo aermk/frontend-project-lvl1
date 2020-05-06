@@ -4,7 +4,6 @@
   "description": "My first project 'Brain Games'",
   "main": "src/index.js",
   "bin": {
-    "brain-games": "bin/brain-games.js",
     "brain-even": "bin/brain-even.js",
     "brain-calc": "bin/brain-calc.js",
     "brain-nod": "bin/brain-nod.js",

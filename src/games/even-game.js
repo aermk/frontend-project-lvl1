@@ -1,33 +1,31 @@
 import randomNum from '../utilities.js';
-import engine from './index.js';
+import engine from '../index.js';
 
-const resultsOfGame = [];
-const correctResult = (numberOfArray) => {
+const isNumEven = (numberOfArray) => {
   if (numberOfArray % 2 === 0) {
-    resultsOfGame.push('yes');
-  } else if (numberOfArray % 2 !== 0) {
-    resultsOfGame.push('no');
+    return true;
   }
-  return resultsOfGame;
+  return false;
 };
 
 const arrOfExprissions = () => {
-  const questions = [];
-  let num = 0;
+  let results = '';
+  let questions = 0;
+  const coupleQuestionAnswer = [];
   for (let i = 0; i < 3; i += 1) {
-    num = randomNum(1, 50);
-    correctResult(num);
-    questions.push(num);
+    questions = randomNum(1, 50);
+    results = (isNumEven(questions) ? 'yes' : 'no');
+    coupleQuestionAnswer.push([questions, results]);
   }
-  return questions;
+  return coupleQuestionAnswer;
 };
 
 const getRules = () => "Answer 'yes' if the number is even, otherwise answer 'no'.";
 
-export const startEven = () => {
-  const expressions = arrOfExprissions(); // присваевается значение функции!
+const startEven = () => {
+  const results = arrOfExprissions(); // присваевается значение функции!
   const rulesString = getRules(); // присваевается значение функции!
-  engine(rulesString, expressions, resultsOfGame); // вызывется с присвоенными значениями в index.js
+  engine(rulesString, results); // вызывется с присвоенными значениями в index.js
 };
 
 export default () => startEven(); // дефолтная функция, вызывающаяся ИЗ bin (исполняемого файла);

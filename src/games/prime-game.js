@@ -1,34 +1,33 @@
 import randomNum from '../utilities.js';
-import engine from './index.js';
+import engine from '../index.js';
 
-const results = [];
-const correctAnswer = (num) => {
-  let correct = 'yes';
-  for (let i = 2; i < num; i += 1) {
+const isNumPrime = (num) => {
+  for (let i = 2; i < num / 2; i += 1) {
     if (num <= 1 || num % i === 0) {
-      correct = 'no';
+      return false;
     }
   }
-  results.push(correct);
-  return results;
+  return true;
 };
 
 const arrOfExprissions = () => {
-  const questions = [];
+  let questions = 0;
+  let results = '';
+  const coupleQuestionAnswer = [];
   for (let i = 0; i < 3; i += 1) {
-    const num = randomNum(1, 50);
-    correctAnswer(num);
-    questions.push(num);
+    questions = randomNum(1, 50);
+    results = isNumPrime(questions) ? 'yes' : 'no';
+    coupleQuestionAnswer.push([questions, results]);
   }
-  return questions;
+  return coupleQuestionAnswer;
 };
 
 const getRules = () => 'Answer "yes" if given number is prime. Otherwise answer "no"';
 
-export const startPrime = () => {
-  const expressions = arrOfExprissions(); // присваевается значение функции!
+const startPrime = () => {
+  const results = arrOfExprissions(); // присваевается значение функции!
   const rulesString = getRules(); // присваевается значение функции!
-  engine(rulesString, expressions, results); // вызывется с присвоенными значениями в index.js
+  engine(rulesString, results); // вызывется с присвоенными значениями в index.js
 };
 
 export default () => startPrime(); // дефолтная функция, вызывающаяся ИЗ bin (исполняемого файла);
