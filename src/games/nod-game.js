@@ -1,35 +1,30 @@
-import engine from '../index.js';
 import randomNum from '../utilities.js';
+import { engine, roundOfCount } from '../index.js';
 
-export const nod = (a, b) => {
+const getNod = (a, b) => {
   if (b) {
-    return nod(b, a % b);
+    return getNod(b, a % b);
   }
   return Math.abs(a);
 };
 
-const exprissionsAndAnswers = () => {
-  let questions = 0;
-  let results = 0;
-  const coupleQuestionAnswer = [];
-  for (let i = 0; i < 3; i += 1) {
+const getArrOfQuestionsAndResults = () => {
+  const arrOfQuestionsAndResults = [];
+  for (let i = 0; i < roundOfCount; i += 1) {
     const num1 = randomNum(1, 50);
     const num2 = randomNum(1, 50);
-    questions = `${num1} ${num2}`;
-    results = (nod(num1, num2));
-    coupleQuestionAnswer.push([questions, results]);
+    const question = `${num1} ${num2}`;
+    const result = (getNod(num1, num2));
+    arrOfQuestionsAndResults.push([question, result]);
   }
-  return coupleQuestionAnswer;
+  return arrOfQuestionsAndResults;
 };
 
-const getRules = () => 'Find the greatest common divisor of given numbers';
+const rule = 'Find the greatest common divisor of given numbers';
 
-const startNod = () => {
-  const results = exprissionsAndAnswers(); // присваевается значение функции!
-  const rulesString = getRules(); // присваевается значение функции!
-  engine(rulesString, results); // вызывется с присвоенными значениями в index.js
+const startNodGame = () => {
+  const arrOfQuestionsAndResults = getArrOfQuestionsAndResults();
+  engine(rule, arrOfQuestionsAndResults);
 };
 
-// дефолтная функция, вызывающаяся ИЗ bin (исполняемого файла);
-// начинает игру.
-export default () => startNod();
+export default () => startNodGame();

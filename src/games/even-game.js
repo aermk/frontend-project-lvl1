@@ -1,32 +1,23 @@
 import randomNum from '../utilities.js';
-import engine from '../index.js';
+import { engine, roundOfCount } from '../index.js';
 
-const isNumEven = (numberOfArray) => {
-  if (numberOfArray % 2 === 0) {
-    return true;
+const isNumEven = (num) => num % 2 === 0;
+
+const getArrOfQuestionsAndResults = () => {
+  const arrOfQuestionsAndResults = [];
+  for (let i = 0; i < roundOfCount; i += 1) {
+    const question = randomNum(1, 50);
+    const result = (isNumEven(question) ? 'yes' : 'no');
+    arrOfQuestionsAndResults.push([question, result]);
   }
-  return false;
+  return arrOfQuestionsAndResults;
 };
 
-const arrOfExprissions = () => {
-  let results = '';
-  let questions = 0;
-  const coupleQuestionAnswer = [];
-  for (let i = 0; i < 3; i += 1) {
-    questions = randomNum(1, 50);
-    results = (isNumEven(questions) ? 'yes' : 'no');
-    coupleQuestionAnswer.push([questions, results]);
-  }
-  return coupleQuestionAnswer;
+const rule = "Answer 'yes' if the number is even, otherwise answer 'no'.";
+
+const startEvenGame = () => {
+  const arrOfQuestionsAndResults = getArrOfQuestionsAndResults();
+  engine(rule, arrOfQuestionsAndResults);
 };
 
-const getRules = () => "Answer 'yes' if the number is even, otherwise answer 'no'.";
-
-const startEven = () => {
-  const results = arrOfExprissions(); // присваевается значение функции!
-  const rulesString = getRules(); // присваевается значение функции!
-  engine(rulesString, results); // вызывется с присвоенными значениями в index.js
-};
-
-export default () => startEven(); // дефолтная функция, вызывающаяся ИЗ bin (исполняемого файла);
-// начинает игру.
+export default () => startEvenGame();

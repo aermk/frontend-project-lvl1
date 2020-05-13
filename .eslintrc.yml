@@ -1,6 +1,5 @@
 env:
   node: true
-  browser: true
 
 # https://github.com/babel/babel-eslint
 # parser: babel-eslint

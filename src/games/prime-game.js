@@ -1,34 +1,30 @@
 import randomNum from '../utilities.js';
-import engine from '../index.js';
+import { engine, roundOfCount } from '../index.js';
 
 const isNumPrime = (num) => {
-  for (let i = 2; i < num / 2; i += 1) {
-    if (num <= 1 || num % i === 0) {
+  for (let i = 2; i <= num / 2; i += 1) {
+    if (num % i === 0) {
       return false;
     }
   }
   return true;
 };
 
-const arrOfExprissions = () => {
-  let questions = 0;
-  let results = '';
-  const coupleQuestionAnswer = [];
-  for (let i = 0; i < 3; i += 1) {
-    questions = randomNum(1, 50);
-    results = isNumPrime(questions) ? 'yes' : 'no';
-    coupleQuestionAnswer.push([questions, results]);
+const getArrOfQuestionsAndResults = () => {
+  const arrOfQuestionsAndResults = [];
+  for (let i = 0; i < roundOfCount; i += 1) {
+    const question = randomNum(1, 50);
+    const result = isNumPrime(question) ? 'yes' : 'no';
+    arrOfQuestionsAndResults.push([question, result]);
   }
-  return coupleQuestionAnswer;
+  return arrOfQuestionsAndResults;
 };
 
-const getRules = () => 'Answer "yes" if given number is prime. Otherwise answer "no"';
+const rule = 'Answer "yes" if given number is prime. Otherwise answer "no"';
 
-const startPrime = () => {
-  const results = arrOfExprissions(); // присваевается значение функции!
-  const rulesString = getRules(); // присваевается значение функции!
-  engine(rulesString, results); // вызывется с присвоенными значениями в index.js
+const startPrimeGame = () => {
+  const arrOfQuestionsAndResults = getArrOfQuestionsAndResults();
+  engine(rule, arrOfQuestionsAndResults);
 };
 
-export default () => startPrime(); // дефолтная функция, вызывающаяся ИЗ bin (исполняемого файла);
-// начинает игру.
+export default () => startPrimeGame();
