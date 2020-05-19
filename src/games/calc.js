@@ -1,7 +1,7 @@
 import randomNum from '../utilities.js';
-import { engine, roundOfCount } from '../index.js';
+import { engine, roundsCount } from '../index.js';
 
-const getSolution = (num1, sign, num2) => {
+const calculate = (num1, num2, sign) => {
   let correctAnswer;
   switch (sign) {
     case '+': correctAnswer = num1 + num2;
@@ -15,25 +15,26 @@ const getSolution = (num1, sign, num2) => {
   return correctAnswer;
 };
 
-const getArrOfQuestionsAndResults = () => {
-  const arrOfSigns = ['+', '-', '*'];
-  const arrOfQuestionsAndResults = [];
-  for (let i = 0; i < roundOfCount; i += 1) {
+const getGameData = () => {
+  const signs = ['+', '-', '*'];
+  const indexOfLastSign = signs.length - 1;
+  const gameData = [];
+  for (let i = 0; i < roundsCount; i += 1) {
     const num1 = randomNum(1, 50);
-    const sign = arrOfSigns[(randomNum(0, 2))];
     const num2 = randomNum(1, 50);
+    const sign = signs[(randomNum(0, indexOfLastSign))];
     const question = `${num1} ${sign} ${num2}`;
-    const result = getSolution(num1, sign, num2);
-    arrOfQuestionsAndResults.push([question, result]);
+    const result = calculate(num1, num2, sign);
+    gameData.push([question, result]);
   }
-  return arrOfQuestionsAndResults;
+  return gameData;
 };
 
 const rule = 'What is the result of the expression?';
 
 const startCalcGame = () => {
-  const arrOfQuestionsAndResults = getArrOfQuestionsAndResults();
-  engine(rule, arrOfQuestionsAndResults);
+  const gameData = getGameData();
+  engine(rule, gameData);
 };
 
 export default () => startCalcGame();
