@@ -1,5 +1,5 @@
 import randomNum from '../utilities.js';
-import { engine, roundsCount } from '../index.js';
+import engine from '../index.js';
 
 const calculate = (num1, num2, sign) => {
   let correctAnswer;
@@ -18,23 +18,18 @@ const calculate = (num1, num2, sign) => {
 const getGameData = () => {
   const signs = ['+', '-', '*'];
   const indexOfLastSign = signs.length - 1;
-  const gameData = [];
-  for (let i = 0; i < roundsCount; i += 1) {
-    const num1 = randomNum(1, 50);
-    const num2 = randomNum(1, 50);
-    const sign = signs[(randomNum(0, indexOfLastSign))];
-    const question = `${num1} ${sign} ${num2}`;
-    const result = calculate(num1, num2, sign);
-    gameData.push([question, result]);
-  }
-  return gameData;
+  const num1 = randomNum(1, 50);
+  const num2 = randomNum(1, 50);
+  const sign = signs[(randomNum(0, indexOfLastSign))];
+  const question = `${num1} ${sign} ${num2}`;
+  const result = calculate(num1, num2, sign);
+  return [question, String(result)];
 };
 
 const rule = 'What is the result of the expression?';
 
 const startCalcGame = () => {
-  const gameData = getGameData();
-  engine(rule, gameData);
+  engine(rule, getGameData);
 };
 
 export default () => startCalcGame();

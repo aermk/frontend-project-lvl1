@@ -1,5 +1,5 @@
 import randomNum from '../utilities.js';
-import { engine, roundsCount } from '../index.js';
+import engine from '../index.js';
 
 const getGreatestCommonDivisor = (num1, num2) => {
   if (num2) {
@@ -9,22 +9,17 @@ const getGreatestCommonDivisor = (num1, num2) => {
 };
 
 const getGameData = () => {
-  const gameData = [];
-  for (let i = 0; i < roundsCount; i += 1) {
-    const num1 = randomNum(1, 50);
-    const num2 = randomNum(1, 50);
-    const question = `${num1} ${num2}`;
-    const result = (getGreatestCommonDivisor(num1, num2));
-    gameData.push([question, result]);
-  }
-  return gameData;
+  const num1 = randomNum(1, 50);
+  const num2 = randomNum(1, 50);
+  const question = `${num1} ${num2}`;
+  const result = (getGreatestCommonDivisor(num1, num2));
+  return [question, String(result)];
 };
 
 const rule = 'Find the greatest common divisor of given numbers';
 
 const startGcdGame = () => {
-  const gameData = getGameData();
-  engine(rule, gameData);
+  engine(rule, getGameData);
 };
 
 export default () => startGcdGame();
